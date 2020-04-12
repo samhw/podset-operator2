@@ -108,7 +108,8 @@ func (r *ReconcilePodSet) Reconcile(request reconcile.Request) (reconcile.Result
     }
     labelSelector := labels.SelectorFromSet(lbs)
     listOps := &client.ListOptions{Namespace: podSet.Namespace, LabelSelector: labelSelector}
-    if err = r.client.List(context.TODO(), listOps, podList); err != nil {
+    #if err = r.client.List(context.TODO(), listOps, podList); err != nil {
+    if err = r.client.List(podList, context.TODO(), listOps); err != nil {
         return reconcile.Result{}, err
     }
 
